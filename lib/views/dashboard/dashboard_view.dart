@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
+import 'package:movies/widgets/movie_item.dart';
 
 class Dashboard extends StatelessWidget{
   const Dashboard({super.key});
@@ -13,7 +14,12 @@ class Dashboard extends StatelessWidget{
     print("w ${width}");
     print("h ${height}");
 
-    List items = ["hola"];
+    List items = [
+      "hola",
+        "hola",
+          "hola",
+            "hola",
+    ];
 
     return Scaffold(
       body: Container(
@@ -37,7 +43,7 @@ class Dashboard extends StatelessWidget{
                 //Flexible(fit: FlexFit.tight, child: 
                 Container(
                   height: 42,
-                  width: 252,
+                  width: width-60-42-8,
                   //decoration: const BoxDecoration(color: colorSW),
                   child: TextField(
                     style: TextStyle(fontSize: 14.0, color: colorWH),
@@ -59,7 +65,7 @@ class Dashboard extends StatelessWidget{
                     ),
                   ),
                 ),
-
+                SizedBox(width: 8,),
                 Container(
                   height: 42,
                   width: 42,
@@ -79,31 +85,49 @@ class Dashboard extends StatelessWidget{
               padding: const EdgeInsets.only(bottom: 30),
               child: Text("categorias"),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: items.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(items[index]),
-                );
-              },
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: items.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return MovieItem();
+                },
+              ),
             )
           ],
         ),
       ),
       bottomNavigationBar: 
         Container(
-          decoration: const BoxDecoration(color: colorSW),
+          decoration: const BoxDecoration(color: colorBG),
           child: Padding(
             padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-            child: SizedBox(
-              width: 200,
-              height: 42,
               child: Container(
-                decoration: const BoxDecoration(color: colorHL),
-                child: Text("hola"),
+                height: 42,
+                //decoration: const BoxDecoration(color: colorHL),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 42,
+                      width: 134,
+                      decoration: const BoxDecoration(color: colorSW),
+                      child: Text("Load More", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
+                    ),
+                    SizedBox(width: width-60-134*2,),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/watchlist');
+                      },
+                      child: Container(
+                        height: 42,
+                        width: 134,
+                        decoration: const BoxDecoration(color: colorHL),
+                        child: Text("Watch List", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
           ),
         ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
 import 'package:movies/views/dashboard/dashboard_view.dart';
 import 'package:movies/views/splash/splash_view.dart';
+import 'package:movies/views/watchlist/watchlist_view.dart';
 
 void main() {
   runApp(const MoviesApp());
@@ -23,7 +24,7 @@ class MoviesApp extends StatelessWidget {
       routes: {
         '/dashboard': (_) => const Dashboard(),
         //'/dashboard': (_) => const TodoList(),
-        //'/watchlist': (_) => const AddTodoPage(),
+        '/watchlist': (_) => const Watchlist(),
         //'/details': (_) => const AddTodoPage(),
       },
     );
