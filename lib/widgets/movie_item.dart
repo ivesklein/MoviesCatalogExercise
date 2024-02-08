@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
+import 'package:movies/widgets/m_image.dart';
 
 class MovieItem extends StatelessWidget{
   Map movie;
@@ -22,8 +23,11 @@ class MovieItem extends StatelessWidget{
             Container(
               width: 95,
               height: 120,
-              color: Colors.amber,
-              //padding: EdgeInsets.only(right: 22),
+              child: MImage(url: movie["poster_path"]),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(16))
+              ),
+              clipBehavior: Clip.hardEdge,
             ),
             SizedBox(width:22),
             Expanded(

@@ -3,6 +3,7 @@ import 'package:movies/constants.dart';
 import 'package:movies/views/details/details_controller.dart';
 import 'package:movies/widgets/category_button.dart';
 import 'package:movies/widgets/m_icon_button.dart';
+import 'package:movies/widgets/m_image.dart';
 import 'package:movies/widgets/movie_item.dart';
 
 class Details extends StatefulWidget{
@@ -66,6 +67,7 @@ class _DetailsState extends State<Details> {
                       color: colorHL,
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16))
                     ),
+                    child: MImage(url: ctrl.movie["backdrop_path"]??ctrl.movie["poster_path"]),
                   ),
                   Container(
                     width: double.infinity,
@@ -81,6 +83,8 @@ class _DetailsState extends State<Details> {
                             borderRadius: BorderRadius.all(Radius.circular(16)
                             )
                           ),
+                          child: MImage(url: ctrl.movie["poster_path"]),
+                          clipBehavior: Clip.hardEdge,
                         ),
                         Expanded(
                           child: Container(
