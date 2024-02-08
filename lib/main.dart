@@ -23,10 +23,10 @@ class MoviesApp extends StatelessWidget {
       ),
       initialRoute: '/dashboard',
       routes: {
-        '/dashboard': (_) => const Dashboard(),
+        '/dashboard': (_) => Dashboard(),
         //'/dashboard': (_) => const TodoList(),
-        '/watchlist': (_) => const Watchlist(),
-        '/details': (_) => const Details(),
+        '/watchlist': (_) => Watchlist(),
+        '/details': (_) => Details(),
       },
       debugShowCheckedModeBanner: false,
     );

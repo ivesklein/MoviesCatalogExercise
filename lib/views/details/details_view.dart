@@ -1,9 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
+import 'package:movies/views/details/details_controller.dart';
+import 'package:movies/widgets/category_button.dart';
 import 'package:movies/widgets/movie_item.dart';
 
-class Details extends StatelessWidget{
+class Details extends StatefulWidget{
   const Details({super.key});
+  
+  @override
+  State<Details> createState() => _DetailsState();
+}
+
+class _DetailsState extends State<Details> {
+
+  late int args;
+
+  DetailsController ctrl = DetailsController();
+
+  @override
+  void initState() {
+    super.initState();
+    ctrl.registerOnUpdate((){
+      setState(() {});
+    });
+  }
+ 
+
+  @override
+  void didChangeDependencies() {
+    try {
+      args = (ModalRoute.of(context)!.settings.arguments as int);
+      ctrl.updateId(args);
+    } catch (e) {
+      print("args invalid");
+    }
+    
+    super.didChangeDependencies();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +47,6 @@ class Details extends StatelessWidget{
 
     print("w ${width}");
     print("h ${height}");
-
-    List items = [
-      "hola",
-        "hola",
-          "hola",
-            "hola",
-    ];
 
     return Scaffold(
       body: Container(
@@ -58,7 +85,7 @@ class Details extends StatelessWidget{
                           child: Container(
                             height: 120,
                             padding: EdgeInsets.only(top: 72, left: 12, right: 12),
-                            child: Text("Titulo pelicula", textAlign: TextAlign.left, style: TextStyle(fontSize: 18, color: colorWH, fontWeight: FontWeight.w600)),
+                            child: Text(ctrl.movie["title"]??"Loading...", textAlign: TextAlign.left, style: TextStyle(fontSize: 18, color: colorWH, fontWeight: FontWeight.w600)),
                           )
                         )
                       ],
@@ -79,17 +106,12 @@ class Details extends StatelessWidget{
                     height: 44,
                     child: Row(
                       children: [
-                        Container(
-                          width: 79,
-                          height: 24,
-                          color: colorSW,
-                        ),
-                        SizedBox(width: 12),
-                        Container(
-                          width: 79,
-                          height: 24,
-                          color: colorSW,
-                        ),
+                        ...(ctrl.movie["genres"] as List<dynamic>).map((e) => Row(
+                          children: [
+                            CategoryButton(category: e, selected: "", onTap: (){}),
+                            SizedBox(width: 12),
+                          ],
+                        )).toList()
                       ],
                     ),
                   ),
@@ -117,33 +139,40 @@ class Details extends StatelessWidget{
                     ),
                   ),
                   //content
-                  false?Container(
+                  true?Container(
+                    width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
-                        Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
-                        Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
-                        Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                        Text("Overviews:", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                        Text(ctrl.movie["overview"]??"", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                        Text("Release Date:", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                        Text(ctrl.movie["release_date"]??"0000-00-00", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
-                            Column(
-                              children: [
-                                Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
-                                Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
-                              ],
+                            Container(
+                              width: (width-60)/2,
+                              child: Column(
+                                children: [
+                                  Text("Average Rating:", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                                  Text((ctrl.movie["vote_average"] as double).toStringAsFixed(1)??"", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                                ],
+                              ),
                             ),
-                            Column(
-                              children: [
-                                Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
-                                Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
-                              ],
+                            Container(
+                              width: (width-60)/2,
+                              child: Column(
+                                children: [
+                                  Text("Rate Count:", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                                  Text((ctrl.movie["vote_count"] as int).toString()??"", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                                ],
+                              ),
                             ),
                           ],
                         ),
-                        Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
-                        Text("Reviews", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                        Text("Popularity:", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
+                        Text((ctrl.movie["popularity"] as double).toStringAsFixed(1)??"", textAlign: TextAlign.left, style: TextStyle(fontSize: 14, color: colorWH, fontWeight: FontWeight.w400)),
                       ],
                     ),
                   ):
@@ -197,5 +226,4 @@ class Details extends StatelessWidget{
         ),
     );
   }
-
 }

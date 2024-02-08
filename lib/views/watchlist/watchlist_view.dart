@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
+import 'package:movies/views/watchlist/watchlist_controller.dart';
 import 'package:movies/widgets/movie_item.dart';
 
-class Watchlist extends StatelessWidget{
+class Watchlist extends StatefulWidget{
   const Watchlist({super.key});
+
+  @override
+  State<Watchlist> createState() => _WatchlistState();
+}
+
+class _WatchlistState extends State<Watchlist> {
+
+  WatchListController ctrl = WatchListController();
+
+  @override
+  void initState() {
+    super.initState();
+    ctrl.registerOnUpdate((){
+      setState(() {});
+    });
+    ctrl.loadMore();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +31,6 @@ class Watchlist extends StatelessWidget{
 
     print("w ${width}");
     print("h ${height}");
-
-    List items = ["hola", "s", "g"];
 
     return Scaffold(
       body: Container(
@@ -34,9 +50,9 @@ class Watchlist extends StatelessWidget{
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: items.length,
+              itemCount: ctrl.moviesFiltered.length,
               itemBuilder: (BuildContext context, int index) {
-                return MovieItem();
+                return MovieItem(ctrl.moviesFiltered[index]);
               },
             )
           ],
@@ -77,5 +93,4 @@ class Watchlist extends StatelessWidget{
         ),
     );
   }
-
 }

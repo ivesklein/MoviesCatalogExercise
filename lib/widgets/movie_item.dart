@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
 
 class MovieItem extends StatelessWidget{
+  Map movie;
+
+  MovieItem(this.movie);
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, "/details", arguments: 1);
+        Navigator.pushNamed(context, "/details", arguments: movie["id"]??1);
       },
       child: Container(
         width: double.infinity,
@@ -26,11 +31,11 @@ class MovieItem extends StatelessWidget{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Title:", style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                  Text("super peli", style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w400)),
+                  Text(movie["title"]??"" , style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w400)),
                   Text("Release date:", style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                  Text("2019-68-98", style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w400)),
+                  Text(movie["release_date"]??"", style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w400)),
                   Text("Average Rating:", style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                  Text("5.6", style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w400)),
+                  Text(movie["vote_average"].toStringAsFixed(1)??"", style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w400)),
                 ],
               ),
             ),
