@@ -14,10 +14,13 @@ class CategoryButton extends StatelessWidget{
     return GestureDetector(
       onTap: (){onTap();},
       child: Container(
-        padding: EdgeInsets.only(left: 8, right: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+          color: category==selected?colorHL:colorSW,
+        ),
+        padding: EdgeInsets.only(left: 8, right: 8, top: 4),
         height: 24,
-        color: category==selected?colorHL:colorSW,
-        child: Text(category),
+        child: Text(category, style: TextStyle(fontSize: 12.0, color: colorWH),),
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
 import 'package:movies/views/dashboard/dashboard_controller.dart';
 import 'package:movies/widgets/category_button.dart';
+import 'package:movies/widgets/m_icon_button.dart';
+import 'package:movies/widgets/m_text_button.dart';
 import 'package:movies/widgets/movie_item.dart';
 
 class Dashboard extends StatefulWidget{
@@ -78,17 +80,14 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 SizedBox(width: 8,),
-                GestureDetector(
+                MIconButton(
                   onTap: () {
                     ctrl.search();
                   },
-                  child: Container(
-                    height: 42,
-                    width: 42,
-                    decoration: const BoxDecoration(color: colorSW),
-                    child: Text("btn", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                  ),
-                )
+                  bg: colorSW,
+                  color: colorWH,
+                  icon1: "search",
+                ),
               ],
             ),
             Container(
@@ -134,24 +133,18 @@ class _DashboardState extends State<Dashboard> {
                 //decoration: const BoxDecoration(color: colorHL),
                 child: Row(
                   children: [
-                    Container(
-                      height: 42,
-                      width: 134,
-                      decoration: const BoxDecoration(color: colorSW),
-                      child: Text("Load More", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                    ),
+                    MTextButton(),
                     SizedBox(width: width-60-134*2,),
-                    GestureDetector(
+
+                    MIconButton(
                       onTap: () {
                         Navigator.pushNamed(context, '/watchlist');
                       },
-                      child: Container(
-                        height: 42,
-                        width: 134,
-                        decoration: const BoxDecoration(color: colorHL),
-                        child: Text("Watch List", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                      ),
-                    )
+                      label: "Watch List",
+                      bg: colorHL,
+                      color: colorBG,
+                      icon2: "bookmark",
+                    ),
                   ],
                 ),
               ),

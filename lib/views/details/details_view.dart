@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
 import 'package:movies/views/details/details_controller.dart';
 import 'package:movies/widgets/category_button.dart';
+import 'package:movies/widgets/m_icon_button.dart';
 import 'package:movies/widgets/movie_item.dart';
 
 class Details extends StatefulWidget{
@@ -196,43 +197,31 @@ class _DetailsState extends State<Details> {
                 //decoration: const BoxDecoration(color: colorHL),
                 child: Row(
                   children: [
-                    GestureDetector(
+                    MIconButton(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Container(
-                        height: 42,
-                        width: 134,
-                        decoration: const BoxDecoration(color: colorSW),
-                        child: Text("Back", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                      ),
+                      label: "Back",
+                      bg: colorSW,
+                      color: colorWH,
+                      icon1: "back",
                     ),
                     SizedBox(width: width-60-134-42,),
-                    GestureDetector(
+                    
+                    ctrl.inWatchlist?MIconButton(
                       onTap: () {
-                        //Navigator.pushNamed(context, '/watchlist');
+                        ctrl.add2WatchList(false);
                       },
-                      child: ctrl.inWatchlist?GestureDetector(
-                        onTap: () {
-                          ctrl.add2WatchList(false);
-                        },
-                        child: Container(
-                          height: 42,
-                          width: 42,
-                          decoration: const BoxDecoration(color: colorHL),
-                          child: Text("TK", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                        ),
-                      ):GestureDetector(
-                        onTap: () {
-                          ctrl.add2WatchList(true);
-                        },
-                        child: Container(
-                          height: 42,
-                          width: 42,
-                          decoration: const BoxDecoration(color: colorSW),
-                          child: Text("TK", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                        ),
-                      ),
+                      bg: colorHL,
+                      color: colorBG,
+                      icon1: "bookmark",
+                    ):MIconButton(
+                      onTap: () {
+                        ctrl.add2WatchList(true);
+                      },
+                      bg: colorSW,
+                      color: colorWH,
+                      icon1: "bookmark",
                     )
                   ],
                 ),

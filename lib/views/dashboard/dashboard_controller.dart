@@ -23,6 +23,8 @@ class DashBoardController {
     searchCtrl.addListener(() {
       print("################         ${searchCtrl.text}");
     });
+
+    selectFilter("Top Rated");
   }
 
   loadMore(){

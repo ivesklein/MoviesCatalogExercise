@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies/constants.dart';
 import 'package:movies/views/watchlist/watchlist_controller.dart';
+import 'package:movies/widgets/m_icon_button.dart';
+import 'package:movies/widgets/m_text_button.dart';
 import 'package:movies/widgets/movie_item.dart';
 
 class Watchlist extends StatefulWidget{
@@ -68,24 +70,18 @@ class _WatchlistState extends State<Watchlist> {
                 //decoration: const BoxDecoration(color: colorHL),
                 child: Row(
                   children: [
-                    Container(
-                      height: 42,
-                      width: 134,
-                      decoration: const BoxDecoration(color: colorSW),
-                      child: Text("Load More", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                    ),
+                    MTextButton(),
                     SizedBox(width: width-60-134*2,),
-                    GestureDetector(
+                    MIconButton(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Container(
-                        height: 42,
-                        width: 134,
-                        decoration: const BoxDecoration(color: colorSW),
-                        child: Text("Back", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
-                      ),
-                    )
+                      label: "Back",
+                      bg: colorSW,
+                      color: colorWH,
+                      icon1: "back",
+                    ),
+                    
                   ],
                 ),
               ),
