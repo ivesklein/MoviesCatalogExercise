@@ -8,6 +8,10 @@ class DetailsController {
   Function update = (){print("OnUpdate not registered");};
   bool showLoad = false;
   int id = 0;
+  bool inWatchlist = false;
+
+  List moviesWL = [];
+
   Map movie = {
       "backdrop_path": "",
       "genres": [],
@@ -30,12 +34,23 @@ class DetailsController {
     loadContent();
   }
 
-  add2WatchList(){
-    
+  add2WatchList(bool add){
+    API.add2watchlist(id, add: add);
+    inWatchlist = add;
+    update();
   }
   
   void loadContent() async {
     movie = MoviesModel.parseId( await API.getId(id));
+    print(movie);
+
+    moviesWL = MoviesModel.parseData(await API.getWatchList(1));
+    moviesWL.forEach((element) {
+      if(element["id"]==id){
+        inWatchlist = true;
+      }
+    });
+
     update();
   }
 

@@ -212,11 +212,26 @@ class _DetailsState extends State<Details> {
                       onTap: () {
                         //Navigator.pushNamed(context, '/watchlist');
                       },
-                      child: Container(
-                        height: 42,
-                        width: 42,
-                        decoration: const BoxDecoration(color: colorHL),
-                        child: Text("TK", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
+                      child: ctrl.inWatchlist?GestureDetector(
+                        onTap: () {
+                          ctrl.add2WatchList(false);
+                        },
+                        child: Container(
+                          height: 42,
+                          width: 42,
+                          decoration: const BoxDecoration(color: colorHL),
+                          child: Text("TK", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
+                        ),
+                      ):GestureDetector(
+                        onTap: () {
+                          ctrl.add2WatchList(true);
+                        },
+                        child: Container(
+                          height: 42,
+                          width: 42,
+                          decoration: const BoxDecoration(color: colorSW),
+                          child: Text("TK", textAlign: TextAlign.left, style: TextStyle(fontSize: 12, color: colorWH, fontWeight: FontWeight.w600)),
+                        ),
                       ),
                     )
                   ],

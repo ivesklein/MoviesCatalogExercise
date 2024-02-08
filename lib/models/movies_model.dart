@@ -30,6 +30,8 @@ class MoviesModel{
 
   static Map parseId(data) {
 
+    print(data);
+
     List<String> genres = (data["genres"] as List<dynamic>).map((e) => (e["name"] as String)).toList();
 
     return {
