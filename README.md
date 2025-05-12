@@ -3,7 +3,7 @@
 ## How to run
 
 - Required flutter version: 3.16.9
-- add api key to secret.dart `const String apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZjUyNjA1MTRiNDNkOTVlYWZhMzQwYmM4ZDQwMTcxYSIsInN1YiI6IjY1YzNjNjBjYjc2Y2JiMDE4NDEwNGM5YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4nOHHGxTlMvHj3bS63sn2c2NBj1YN6PhDt7ps1vYa0Y";`
+- add api key to secret.dart `const String apiKey = "[apyKey]";`
 - Just run `flutter run`
 
 ## To do
